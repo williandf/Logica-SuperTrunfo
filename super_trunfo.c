@@ -1,68 +1,119 @@
 #include <stdio.h>
 
-// Estrutura para armazenar os dados da carta
+// Estrutura para a carta
 struct Carta {
-    char estado[3];
-    char codigo[10];
-    char cidade[50];
+    char pais[50];
     int populacao;
     float area;
     float pib;
     int pontos_turisticos;
-    float densidade_populacional;
-    float pib_per_capita;
+    float densidade;
 };
 
-// Função para calcular os atributos derivados
-void calcular_derivados(struct Carta *carta) {
-    carta->densidade_populacional = carta->populacao / carta->area;
-    carta->pib_per_capita = carta->pib / carta->populacao;
+// Função para calcular densidade
+void calcular_densidade(struct Carta *carta) {
+    carta->densidade = carta->populacao / carta->area;
 }
 
-// Função para exibir os dados de uma carta
+// Exibe os dados da carta
 void exibir_carta(struct Carta carta) {
-    printf("\n%s (%s):\n", carta.cidade, carta.estado);
+    printf("\nPaís: %s\n", carta.pais);
     printf("População: %d\n", carta.populacao);
     printf("Área: %.2f km²\n", carta.area);
     printf("PIB: %.2f bilhões\n", carta.pib);
     printf("Pontos Turísticos: %d\n", carta.pontos_turisticos);
-    printf("Densidade Populacional: %.2f hab/km²\n", carta.densidade_populacional);
-    printf("PIB per capita: %.2f\n", carta.pib_per_capita);
+    printf("Densidade Demográfica: %.2f hab/km²\n", carta.densidade);
 }
 
+// Função principal
 int main() {
-    // Cadastro das cartas diretamente no código
-    struct Carta carta1 = {
-        "SP", "C001", "São Paulo", 12300000, 1521.11, 236.0, 20
-    };
+    struct Carta carta1 = {"Brasil", 213000000, 8515767.0, 2200.0, 25};
+    struct Carta carta2 = {"Argentina", 45195777, 2780400.0, 640.0, 18};
 
-    struct Carta carta2 = {
-        "RJ", "C002", "Rio de Janeiro", 6748000, 1182.30, 140.0, 15
-    };
+    calcular_densidade(&carta1);
+    calcular_densidade(&carta2);
 
-    // Cálculo dos atributos derivados
-    calcular_derivados(&carta1);
-    calcular_derivados(&carta2);
+    int opcao;
 
-    // Exibição das cartas
-    printf("=== Carta 1 ===");
+    printf("=== SUPER TRUNFO - COMPARAÇÃO DE CARTAS ===\n");
     exibir_carta(carta1);
-
-    printf("\n=== Carta 2 ===");
     exibir_carta(carta2);
 
-    // Escolha do atributo fixo para comparação: POPULAÇÃO
-    printf("\nComparação de cartas (Atributo: População):\n");
-    printf("Carta 1 - %s (%s): %d\n", carta1.cidade, carta1.estado, carta1.populacao);
-    printf("Carta 2 - %s (%s): %d\n", carta2.cidade, carta2.estado, carta2.populacao);
+    printf("\nEscolha um atributo para comparar:\n");
+    printf("1 - População\n");
+    printf("2 - Área\n");
+    printf("3 - PIB\n");
+    printf("4 - Pontos Turísticos\n");
+    printf("5 - Densidade Demográfica\n");
+    printf("Opção: ");
+    scanf("%d", &opcao);
 
-    // Comparação usando if / if-else
-    if (carta1.populacao > carta2.populacao) {
-        printf("Resultado: Carta 1 (%s) venceu!\n", carta1.cidade);
-    } else if (carta2.populacao > carta1.populacao) {
-        printf("Resultado: Carta 2 (%s) venceu!\n", carta2.cidade);
-    } else {
-        printf("Resultado: Empate!\n");
+    printf("\nComparação entre %s e %s:\n", carta1.pais, carta2.pais);
+
+    switch (opcao) {
+        case 1:
+            printf("Atributo: População\n");
+            printf("%s: %d\n", carta1.pais, carta1.populacao);
+            printf("%s: %d\n", carta2.pais, carta2.populacao);
+            if (carta1.populacao > carta2.populacao) {
+                printf("Resultado: %s venceu!\n", carta1.pais);
+            } else if (carta2.populacao > carta1.populacao) {
+                printf("Resultado: %s venceu!\n", carta2.pais);
+            } else {
+                printf("Resultado: Empate!\n");
+            }
+            break;
+        case 2:
+            printf("Atributo: Área\n");
+            printf("%s: %.2f km²\n", carta1.pais, carta1.area);
+            printf("%s: %.2f km²\n", carta2.pais, carta2.area);
+            if (carta1.area > carta2.area) {
+                printf("Resultado: %s venceu!\n", carta1.pais);
+            } else if (carta2.area > carta1.area) {
+                printf("Resultado: %s venceu!\n", carta2.pais);
+            } else {
+                printf("Resultado: Empate!\n");
+            }
+            break;
+        case 3:
+            printf("Atributo: PIB\n");
+            printf("%s: %.2f bilhões\n", carta1.pais, carta1.pib);
+            printf("%s: %.2f bilhões\n", carta2.pais, carta2.pib);
+            if (carta1.pib > carta2.pib) {
+                printf("Resultado: %s venceu!\n", carta1.pais);
+            } else if (carta2.pib > carta1.pib) {
+                printf("Resultado: %s venceu!\n", carta2.pais);
+            } else {
+                printf("Resultado: Empate!\n");
+            }
+            break;
+        case 4:
+            printf("Atributo: Pontos Turísticos\n");
+            printf("%s: %d\n", carta1.pais, carta1.pontos_turisticos);
+            printf("%s: %d\n", carta2.pais, carta2.pontos_turisticos);
+            if (carta1.pontos_turisticos > carta2.pontos_turisticos) {
+                printf("Resultado: %s venceu!\n", carta1.pais);
+            } else if (carta2.pontos_turisticos > carta1.pontos_turisticos) {
+                printf("Resultado: %s venceu!\n", carta2.pais);
+            } else {
+                printf("Resultado: Empate!\n");
+            }
+            break;
+        case 5:
+            printf("Atributo: Densidade Demográfica (menor vence)\n");
+            printf("%s: %.2f hab/km²\n", carta1.pais, carta1.densidade);
+            printf("%s: %.2f hab/km²\n", carta2.pais, carta2.densidade);
+            if (carta1.densidade < carta2.densidade) {
+                printf("Resultado: %s venceu!\n", carta1.pais);
+            } else if (carta2.densidade < carta1.densidade) {
+                printf("Resultado: %s venceu!\n", carta2.pais);
+            } else {
+                printf("Resultado: Empate!\n");
+            }
+            break;
+        default:
+            printf("Opção inválida. Por favor, escolha de 1 a 5.\n");
+            break;
     }
 
     return 0;
