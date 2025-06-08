@@ -26,4 +26,13 @@ gcc super_trunfo.c -o super_trunfo
 5. Densidade Demográfica (menor valor vence)
 
 ## Exemplo de uso
-Você verá um menu no terminal para escolher o atributo. O programa exibirá os valores das duas cartas e o resultado da comparação.
+O programa exibirá menus para escolha dos dois atributos e apresentará a comparação detalhada entre as cartas.
+
+## Funcionalidades
+Menu dinâmico que evita atributos repetidos
+
+Comparações com lógica especial para densidade
+
+Soma dos atributos para decisão final
+
+Operador ternário e tratamento de empate
