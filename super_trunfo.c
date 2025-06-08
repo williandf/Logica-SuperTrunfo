@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 
 // Estrutura de uma carta
 struct Carta {
